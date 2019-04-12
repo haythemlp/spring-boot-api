@@ -10,5 +10,7 @@ spring:
     generate-ddl: true
     show-sql: true
 
-
-
+auth:
+  expiration: 604800
+  secret: springApiSecret
+  header: authorization
