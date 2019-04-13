@@ -1,5 +1,3 @@
-server:
-  port: 8080
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/spring?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
@@ -10,5 +8,7 @@ spring:
     generate-ddl: true
     show-sql: true
 
-
-
+auth:
+  expiration: 604800
+  secret: springApiSecret
+  header: authorization
