@@ -1,4 +1,4 @@
-package com.haythemlp.springboot.auth;
+package com.springboot.api.auth;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;

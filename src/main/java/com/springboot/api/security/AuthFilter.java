@@ -1,7 +1,6 @@
-package com.haythemlp.springboot.security;
+package com.springboot.api.security;
 
-import com.haythemlp.springboot.auth.AuthService;
-import com.haythemlp.springboot.auth.User;
+import com.springboot.api.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

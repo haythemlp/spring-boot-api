@@ -1,4 +1,4 @@
-package com.haythemlp.springboot.security;
+package com.springboot.api.security;
 
 public class JwtResponse {
 

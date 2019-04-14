@@ -1,4 +1,4 @@
-package com.haythemlp.springboot.errors;
+package com.springboot.api.errors;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

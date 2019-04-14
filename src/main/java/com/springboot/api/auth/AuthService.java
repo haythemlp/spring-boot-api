@@ -1,10 +1,9 @@
-package com.haythemlp.springboot.auth;
+package com.springboot.api.auth;
 
-import com.haythemlp.springboot.errors.NotFoundException;
-import com.haythemlp.springboot.repository.UserRepository;
+import com.springboot.api.errors.NotFoundException;
+import com.springboot.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

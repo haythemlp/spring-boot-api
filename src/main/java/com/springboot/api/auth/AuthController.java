@@ -1,8 +1,8 @@
-package com.haythemlp.springboot.auth;
+package com.springboot.api.auth;
 
-import com.haythemlp.springboot.repository.UserRepository;
-import com.haythemlp.springboot.security.JwtResponse;
-import com.haythemlp.springboot.security.TokenUtil;
+import com.springboot.api.repository.UserRepository;
+import com.springboot.api.security.JwtResponse;
+import com.springboot.api.security.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import sun.plugin.liveconnect.SecurityContextHelper;
-
-import javax.sql.DataSource;
-import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/auth")

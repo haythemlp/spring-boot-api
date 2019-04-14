@@ -1,4 +1,4 @@
-package com.haythemlp.springboot;
+package com.springboot.api;
 
 
 import org.springframework.boot.SpringApplication;

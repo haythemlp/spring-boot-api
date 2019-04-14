@@ -1,8 +1,8 @@
-package com.haythemlp.springboot.repository;
+package com.springboot.api.repository;
 
 
 
-import com.haythemlp.springboot.auth.User;
+import com.springboot.api.auth.User;
 import org.springframework.data.repository.CrudRepository;
 
 public  interface UserRepository extends CrudRepository<User,Integer> {

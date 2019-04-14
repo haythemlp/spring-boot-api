@@ -1,4 +1,4 @@
-package com.haythemlp.springboot.auth;
+package com.springboot.api.auth;
 
 public class SignInRequest {
 
