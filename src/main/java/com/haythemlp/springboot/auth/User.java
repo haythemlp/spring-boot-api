@@ -38,11 +38,12 @@ public class User implements UserDetails {
         return true;
     }
 
-    @Id
+
     @GeneratedValue(strategy= GenerationType.AUTO)
 
-
+    @Id
     private Integer id;
+
 
     @NotEmpty
     private String username;
@@ -55,10 +56,6 @@ public class User implements UserDetails {
 
     private String role;
 
-    public String getPassword() {
-        return password;
-    }
-
     public User(){
 
     }
@@ -68,6 +65,13 @@ public class User implements UserDetails {
         this.password = password;
         this.email = email;
     }
+
+
+
+    public String getPassword() {
+        return password;
+    }
+
 
     public void setPassword(String password) {
         this.password = password;

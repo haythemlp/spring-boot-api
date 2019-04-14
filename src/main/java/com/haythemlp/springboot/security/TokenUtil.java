@@ -22,7 +22,7 @@ public class TokenUtil {
     @Value("${auth.secret}")
     private String TOKEN_SECRET="spring";
 
-    private String generateToken(UserDetails userDetails)
+    public String generateToken(UserDetails userDetails)
     {
 
 
