@@ -1,5 +1,6 @@
 package com.haythemlp.springboot.security;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,32 +14,75 @@ import java.util.Map;
 @Component
 public class TokenUtil {
 
-    private final String CLAIMS_SUB="sub";
-    private final String CLAIMS_CREATED="created";
+    private final String CLAIMS_SUB = "sub";
+    private final String CLAIMS_CREATED = "created";
 
     @Value("${auth.expiration}")
-    private  Long TOKEN_VALIDITY=608400L;
+    private Long TOKEN_VALIDITY = 608400L;
 
     @Value("${auth.secret}")
-    private String TOKEN_SECRET="spring";
+    private String TOKEN_SECRET = "spring";
 
-    public String generateToken(UserDetails userDetails)
-    {
+    public String generateToken(UserDetails userDetails) {
 
 
-        Map<String,Object> claims = new HashMap<>();
-        claims.put(CLAIMS_SUB,userDetails.getUsername());
-        claims.put(CLAIMS_CREATED,new Date());
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(CLAIMS_SUB, userDetails.getUsername());
+        claims.put(CLAIMS_CREATED, new Date());
         return Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(generateExpirationDate())
-                .signWith(SignatureAlgorithm.HS512,TOKEN_SECRET)
+                .signWith(SignatureAlgorithm.HS512, TOKEN_SECRET)
                 .compact();
     }
 
-    private  Date generateExpirationDate(){
 
-return new Date(System.currentTimeMillis()+TOKEN_VALIDITY *1000);
+    public String getUsernameFromToken(String token){
+
+        try {
+            Claims claims= getClaims(token);
+
+            return claims.getSubject();
+        }
+        catch (Exception ex) {
+            return  null;
+        }
+
+    }
+
+    public Boolean isTokenValid(String token ,UserDetails user)
+    {
+
+        String username= getUsernameFromToken(token);
+      return (username.equals(user.getUsername()) && !isTokenExpired(token));
+    }
+
+    private boolean isTokenExpired(String token) {
+
+        Date expiration =getClaims(token).getExpiration();
+
+        return expiration.before(new Date());
+    }
+
+    private Date generateExpirationDate() {
+
+        return new Date(System.currentTimeMillis() + TOKEN_VALIDITY * 1000);
+    }
+
+
+    private  Claims getClaims (String token){
+Claims claims;
+        try {
+             claims= Jwts.parser().setSigningKey(TOKEN_SECRET)
+                    .parseClaimsJws(token)
+                    .getBody();
+
+
+        } catch (Exception ex){  claims= null;}
+
+
+
+        return  claims;
     }
 
 }

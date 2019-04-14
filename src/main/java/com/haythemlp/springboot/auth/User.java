@@ -38,10 +38,10 @@ public class User implements UserDetails {
         return true;
     }
 
-
+    @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
 
-    @Id
+
     private Integer id;
 
 
@@ -86,13 +86,17 @@ public class User implements UserDetails {
     }
 
     public String getUsername() {
-        return username;
+        return email;
     }
 
-    public void setUsername(String username) {
+    public void setName(String username) {
         this.username = username;
     }
 
+
+    public String getName() {
+        return username;
+    }
     public String getEmail() {
         return email;
     }

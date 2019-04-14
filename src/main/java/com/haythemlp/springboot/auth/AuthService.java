@@ -49,15 +49,16 @@ public class AuthService implements UserDetailsService {
     }
 
 
-
-
-
-    public User save(User user) {
+    public String save(User user) {
 
         user.setPassword(passwordEncoder().encode(user.getPassword()));
 
         user.setRole("normal");
-        return this.userRepository.save(user);
+
+        userRepository.save(user);
+
+
+        return "saved";
 
         // return  user;
     }
@@ -70,18 +71,17 @@ public class AuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-       // return new org.springframework.security.core.userdetails.User("haythemlp", "1234567", AuthorityUtils.NO_AUTHORITIES);
+        // return new org.springframework.security.core.userdetails.User("haythemlp", "1234567", AuthorityUtils.NO_AUTHORITIES);
 
 
-        User user=userRepository.findByEmail(username);
-        if (user ==null){
+        User user = userRepository.findByEmail(username);
+        if (user == null) {
 
-            throw  new NotFoundException("user not found")
+            throw new NotFoundException("user not found");
         }
 
-        return  user;
+        return user;
     }
-
 
 
 }

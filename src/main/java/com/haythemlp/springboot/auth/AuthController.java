@@ -34,7 +34,8 @@ public class AuthController {
 
 
     @Autowired
-    TokenUtil tokenUtil;
+    private AuthenticationManager authenticationManager;
+
 
 
     @GetMapping(value = {"", "/"})
@@ -51,21 +52,18 @@ public class AuthController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PostMapping({"", "/signin"})
-    public ResponseEntity<User> signin(@RequestBody User user) {
+    @PostMapping({"", "/register"})
+    public ResponseEntity<String> register(@RequestBody User user) {
 
 
-
-        User result = authService.save(user);
+      String result = authService.save(user);
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
     @PostMapping({"", "/login"})
-    public JwtResponse  login (@RequestBody SignInRequest signInRequest) {
+    public   ResponseEntity<JwtResponse>  login (@RequestBody SignInRequest signInRequest) {
 
         final Authentication authentication =authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(signInRequest.getUsername(),signInRequest.getPassword())
@@ -73,13 +71,17 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+
+
         UserDetails user=authService.loadUserByUsername(signInRequest.getUsername());
 
         String token =tokenUtil.generateToken(user);
 
 
-        JwtResponse jwtResponse =new JwtResponse(token)
-        return jwtResponse;
+        JwtResponse jwtResponse =new JwtResponse(token);
+
+
+        return new ResponseEntity<>(jwtResponse,HttpStatus.OK);
 
 
     }
